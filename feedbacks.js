@@ -1,33 +1,75 @@
 const { combineRgb } = require('@companion-module/base')
 
+const BLACK_ON_RED = {
+	bgcolor: combineRgb(255, 0, 0),
+	color: combineRgb(0, 0, 0),
+}
+
 module.exports = async function (self) {
-	self.setFeedbackDefinitions({
-		ChannelState: {
-			name: 'Example Feedback',
+	let feedbacks = {}
+	for (let key in self.DATA) {
+		if (key.startsWith("POWER")) {
+			feedbacks[key] = {
+				name: 'State of ' + key,
+				type: 'boolean',
+				label: 'State of ' + key,
+				defaultStyle: BLACK_ON_RED,
+				options: [],
+				callback: (feedback) => {
+					return self.DATA[key] == 'ON'
+				}
+			}
+		}
+	}
+
+	if ('Dimmer' in self.DATA) {
+		feedbacks['Dimmer'] = {
+			name: 'Dimmer level',
 			type: 'boolean',
-			label: 'Channel State',
-			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
-			},
+			label: 'Dimmer level',
+			defaultStyle: BLACK_ON_RED,
+			options: [{
+				id: 'level',
+				type: 'number',
+				label: 'Level',
+				default: 100,
+				min: 0,
+				max: 100
+			}],
+			callback: (feedback) => (self.DATA.Dimmer == feedback.options.level),
+		}
+	}
+	if ('Color' in self.DATA) {
+		feedbacks['Color'] = {
+			name: 'Color',
+			type: 'boolean',
+			label: 'Color',
+			defaultStyle: BLACK_ON_RED,
 			options: [
 				{
-					id: 'num',
-					type: 'number',
-					label: 'Test',
-					default: 5,
-					min: 0,
-					max: 10,
+					id: 'match',
+					type: 'dropdown',
+					label: 'Match mode',
+					default: '>',
+					choices: [
+						{ id: '>', label: 'Starts with ...' },
+						{ id: '=', label: 'Matches exactly ...' },
+					]
+				},
+				{
+					id: 'color',
+					type: 'textinput',
+					label: 'Color',
 				},
 			],
 			callback: (feedback) => {
-				console.log('Hello world!', feedback.options.num)
-				if (feedback.options.num > 5) {
-					return true
+				if (feedback.options.match == '=') {
+					return feedback.options.color.toUpperCase() == self.DATA.Color.toUpperCase()
 				} else {
-					return false
+					return self.DATA.Color.toUpperCase().startsWith(feedback.options.color.toUpperCase())
 				}
 			},
-		},
-	})
+		}
+	}
+	self.setFeedbackDefinitions(feedbacks)
 }
