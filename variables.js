@@ -17,7 +17,8 @@ module.exports = async function (self) {
 			{ variableId: 'White', name: 'White (0-100)' },
 			{ variableId: 'CT', name: 'Color temperature (153-500)' },
 			{ variableId: 'HSBColor', name: 'HSBColor (H,S,B)' },
-			{ variableId: 'Fade', name: 'Fade (ON, OFF)' },			
+			{ variableId: 'Fade', name: 'Fade (ON, OFF)' },
+			{ variableId: 'Speed', name: 'Fade speed (1..40)'}
 		)
 	}
 	

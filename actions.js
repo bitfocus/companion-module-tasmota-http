@@ -163,6 +163,78 @@ module.exports = function (self) {
 				processResponse(response)
 			}
 		}
+
+		actions['fade'] = {
+			name: 'Fade',
+			options: [{
+				id: 'param',
+				type: 'dropdown',
+				label: 'Action',
+				default: '0',
+				choices: [
+					{id: '0', label: 'Disable'},
+					{id: '1', label: 'Enable'},
+				]
+			}],
+			callback: async (event) => {
+				let response = await self.runCommand(`Fade ${event.options.param}`)
+				processResponse(response)
+			}
+		}
+
+		actions['speed'] = {
+			name: 'Fade Speed',
+			options: [{
+				id: 'value',
+				type: 'number',
+				label: 'Speed (1 fast - 40 slow)',
+				min: 1,
+				max: 40,
+				default: 1,
+			}],
+			callback: async (event) => {
+				let response = await self.runCommand(`Speed ${event.options.value}`)
+				processResponse(response)
+			}
+		}
+
+		actions['scheme'] = {
+			name: 'Light effect scheme',
+			options: [{
+				id: 'scheme',
+				type: 'dropdown',
+				label: 'Scheme ID',
+				default: '0',
+				tooltip: 'For the meaning of IDs 5 to 16, see https://tasmota.github.io/docs/Commands/#light',
+				choices: [
+					{id: '+', label: 'Next scheme'},
+					{id: '-', label: 'Previous scheme'},
+					{id: '0', label: '0 - Single color for LED'},
+					{id: '1', label: '1 - Start wake up sequence'},
+					{id: '2', label: '2 - Cycle up through colors using "Fade speed" setting'},
+					{id: '3', label: '3 - Cycle down through colors using "Fade speed" setting'},
+					{id: '4', label: '4 - Random Cycle through colors using "Fade speed" and "Fade" settings'},
+					{id: '5', label: '5'},
+					{id: '6', label: '6'},
+					{id: '7', label: '7'},
+					{id: '8', label: '8'},
+					{id: '9', label: '9'},
+					{id: '10', label: '10'},
+					{id: '11', label: '11'},
+					{id: '12', label: '12'},
+					{id: '13', label: '13'},
+					{id: '14', label: '14'},
+					{id: '15', label: '15'},
+					{id: '16', label: '16'},
+				],	
+			}],
+			callback: async (event) => {
+				let response = await self.runCommand(`Scheme ${event.options.scheme}`)
+				console.log("Scheme", response)
+				processResponse(response)
+			}
+		}
 	}
+
 	self.setActionDefinitions(actions)
 }
