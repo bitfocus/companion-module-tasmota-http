@@ -87,7 +87,8 @@ function color_preset(color) {
 module.exports = function (self) {
     let presets = {}
     const commands = ["ON", "OFF", "TOGGLE"]
-    for (let key in self.DATA) {
+    console.log("self.DATA = ", JSON.stringify(self.DATA))
+    for (let key in self.state) {
         if (key.startsWith("POWER")) {
             presets["Header "+key] = {
                 category: 'Power',
@@ -129,7 +130,7 @@ module.exports = function (self) {
     		}
         }
 	}
-    if (self.DATA.Color != undefined) {
+    if (self.state.Color != undefined) {
         presets["Color RGB"] = {
             category: "Color",
             name: 'RGB Color Wheel',
@@ -152,5 +153,6 @@ module.exports = function (self) {
             presets["COLOR "+color] = color_preset(color)
         }
     }
+    console.log(JSON.stringify(presets))
     self.setPresetDefinitions(presets)
 }
