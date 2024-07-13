@@ -8,7 +8,7 @@ const BLACK_ON_RED = {
 module.exports = async function (self) {
 	let feedbacks = {}
 	for (let key in self.DATA) {
-		if (key.startsWith("POWER")) {
+		if (key.startsWith('POWER')) {
 			feedbacks[key] = {
 				name: 'State of ' + key,
 				type: 'boolean',
@@ -17,7 +17,7 @@ module.exports = async function (self) {
 				options: [],
 				callback: (feedback) => {
 					return self.DATA[key] == 'ON'
-				}
+				},
 			}
 		}
 	}
@@ -28,15 +28,17 @@ module.exports = async function (self) {
 			type: 'boolean',
 			label: 'Dimmer level',
 			defaultStyle: BLACK_ON_RED,
-			options: [{
-				id: 'level',
-				type: 'number',
-				label: 'Level',
-				default: 100,
-				min: 0,
-				max: 100
-			}],
-			callback: (feedback) => (self.DATA.Dimmer == feedback.options.level),
+			options: [
+				{
+					id: 'level',
+					type: 'number',
+					label: 'Level',
+					default: 100,
+					min: 0,
+					max: 100,
+				},
+			],
+			callback: (feedback) => self.DATA.Dimmer == feedback.options.level,
 		}
 	}
 	if ('Color' in self.DATA) {
@@ -54,7 +56,7 @@ module.exports = async function (self) {
 					choices: [
 						{ id: '>', label: 'Starts with ...' },
 						{ id: '=', label: 'Matches exactly ...' },
-					]
+					],
 				},
 				{
 					id: 'color',
