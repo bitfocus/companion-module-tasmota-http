@@ -128,7 +128,6 @@ module.exports = function (self) {
 			}],
 			callback: async (event) => {
 				let response = await self.runCommand(`Scheme ${event.options.scheme}`)
-				console.log("Scheme", response)
 				processResponse(response)
 			}
 		}

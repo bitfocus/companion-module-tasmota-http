@@ -87,7 +87,6 @@ function color_preset(color) {
 module.exports = function (self) {
     let presets = {}
     const commands = ["ON", "OFF", "TOGGLE"]
-    console.log("self.DATA = ", JSON.stringify(self.DATA))
     for (let key in self.state) {
         if (key.startsWith("POWER")) {
             presets["Header "+key] = {
@@ -98,8 +97,8 @@ module.exports = function (self) {
             }
             for (let c in commands) {
                 const command = commands[c]
-    			presets[key+"_"+command] = {
-    				type: 'button',
+                presets[key+"_"+command] = {
+                    type: 'button',
                     category: 'Power',
                     name: key + " "+command,
                     style: {
@@ -126,10 +125,10 @@ module.exports = function (self) {
                             bgcolor: red,
                         },
                     }]
-    			}
-    		}
+                }
+            }
         }
-	}
+    }
     if (self.state.Color != undefined) {
         presets["Color RGB"] = {
             category: "Color",
@@ -153,6 +152,6 @@ module.exports = function (self) {
             presets["COLOR "+color] = color_preset(color)
         }
     }
-    console.log(JSON.stringify(presets))
+
     self.setPresetDefinitions(presets)
 }
