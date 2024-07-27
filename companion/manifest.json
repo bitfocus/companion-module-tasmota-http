@@ -3,7 +3,7 @@
 	"name": "tasmota-http",
 	"shortname": "tasmota-http",
 	"description": "Control Tasmota devices using HTTP requests",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"license": "MIT",
 	"repository": "git+https://github.com/bitfocus/companion-module-tasmota-http.git",
 	"bugs": "https://github.com/bitfocus/companion-module-tasmota-http/issues",

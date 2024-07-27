@@ -14,10 +14,9 @@ module.exports = function (self) {
 	}
 
 	let power_device_choices = [{ id: '0', label: 'All Devices' }]
-	for (let key in self.DATA) {
-		if (key.startsWith('POWER')) {
-			const device = key.substring(5)
-			power_device_choices.push({ id: device, label: 'Power ' + device })
+	for (let i = 1; i < 11; i++) {
+		if (self.state['POWER' + i] != undefined) {
+			power_device_choices.push({ id: i, label: 'Power ' + i })
 		}
 	}
 
@@ -205,7 +204,7 @@ module.exports = function (self) {
 				if (event.options.command == 'X') {
 					response = await self.runCommand(`Dimmer ${event.options.value}`)
 				} else {
-					response = await self.runCommand(`ct ${event.options.command}`)
+					response = await self.runCommand(`Dimmer ${event.options.command}`)
 				}
 				processResponse(response)
 			},
