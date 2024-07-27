@@ -43,7 +43,7 @@ module.exports = function (self) {
 					id: 'device',
 					type: 'dropdown',
 					label: 'Device',
-					default: '1',
+					default: '0',
 					choices: power_device_choices,
 				},
 				{
