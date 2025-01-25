@@ -53,7 +53,7 @@ module.exports = function (self) {
 					default: 'TOGGLE',
 					choices: [
 						{ id: 'ON', label: 'ON' },
-						{ id: 'OF', label: 'OFF' },
+						{ id: 'OFF', label: 'OFF' },
 						{ id: 'TOGGLE', label: 'TOGGLE' },
 					],
 				},
