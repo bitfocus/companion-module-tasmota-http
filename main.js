@@ -51,7 +51,7 @@ class ModuleInstance extends InstanceBase {
 			)
 		}
 
-		this.updateVariableDefinitions() // export variable definitions
+		await this.updateVariableDefinitions() // export variable definitions
 		this.updateActions() // export actions
 		this.updateFeedbacks() // export feedbacks
 		this.updatePresetDefinitions()
@@ -151,7 +151,7 @@ class ModuleInstance extends InstanceBase {
 	}
 
 	updateVariableDefinitions() {
-		UpdateVariableDefinitions(this)
+		return UpdateVariableDefinitions(this)
 	}
 }
 
