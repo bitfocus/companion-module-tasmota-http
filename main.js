@@ -51,11 +51,11 @@ class ModuleInstance extends InstanceBase {
 			)
 		}
 
-		this.updateVariableDefinitions() // export variable definitions
-		this.updateActions() // export actions
-		this.updateFeedbacks() // export feedbacks
-		this.updatePresetDefinitions()
-		this.initPolling()
+		await this.updateVariableDefinitions() // export variable definitions
+		await this.updateActions() // export actions
+		await this.updateFeedbacks() // export feedbacks
+		await this.updatePresetDefinitions()
+		await this.initPolling()
 	}
 
 	// Return config fields for web config
@@ -142,16 +142,16 @@ class ModuleInstance extends InstanceBase {
 		UpdateActions(this)
 	}
 
-	updateFeedbacks() {
-		UpdateFeedbacks(this)
+	async updateFeedbacks() {
+		await UpdateFeedbacks(this)
 	}
 
 	updatePresetDefinitions() {
 		UpdatePresetDefinitions(this)
 	}
 
-	updateVariableDefinitions() {
-		UpdateVariableDefinitions(this)
+	async updateVariableDefinitions() {
+		await UpdateVariableDefinitions(this)
 	}
 }
 
